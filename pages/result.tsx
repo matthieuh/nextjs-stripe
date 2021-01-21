@@ -3,8 +3,6 @@ import { useRouter } from 'next/router'
 
 import Layout from '../components/Layout'
 import PrintObject from '../components/PrintObject'
-import Cart from '../components/Cart'
-import ClearCart from '../components/ClearCart'
 
 import { fetchGetJSON } from '../utils/api-helpers'
 import useSWR from 'swr'
@@ -24,15 +22,13 @@ const ResultPage: NextPage = () => {
   if (error) return <div>failed to load</div>
 
   return (
-    <Layout title="Checkout Payment Result | Next.js + TypeScript Example">
+    <Layout title="Checkout Payment Result | Next.js + Stripe">
       <div className="page-container">
         <h1>Checkout Payment Result</h1>
-        <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2>
+        <h2>Status: {data?.portalSession?.payment_intent?.status ?? 'loading...'}</h2>
         <h3>CheckoutSession response:</h3>
-        <PrintObject content={data ?? 'loading...'} />
-        <Cart>
-          <ClearCart />
-        </Cart>
+        <PrintObject content={data?.portalSession ?? 'loading...'} />
+        <a href={data?.portalSession?.url}>My subscription</a>
       </div>
     </Layout>
   )

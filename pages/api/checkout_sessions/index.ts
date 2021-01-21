@@ -14,26 +14,20 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const amount: number = req.body.amount
+    const { priceId } = req.body;
     try {
-      // Validate the amount that was passed from the client.
-      if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
-        throw new Error('Invalid amount.')
-      }
       // Create Checkout Sessions from body params.
       const params: Stripe.Checkout.SessionCreateParams = {
-        submit_type: 'donate',
+        mode: "subscription",
         payment_method_types: ['card'],
         line_items: [
           {
-            name: 'Custom amount donation',
-            amount: formatAmountForStripe(amount, CURRENCY),
-            currency: CURRENCY,
+            price: priceId,
             quantity: 1,
           },
         ],
         success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/donate-with-checkout`,
+        cancel_url: `${req.headers.origin}/`,
       }
       const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(
         params

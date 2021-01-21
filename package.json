@@ -1,7 +1,7 @@
 {
-  "name": "with-stripe-typescript",
-  "version": "2.0.0",
-  "description": "Full-stack TypeScript example using Next.js, react-stripe-js, and stripe-node.",
+  "name": "Next.js-stripe",
+  "version": "1.0.0",
+  "description": "Next.js + Stripe demo",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -17,8 +17,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "stripe": "8.56.0",
-    "swr": "^0.1.16",
-    "use-shopping-cart": "2.1.0"
+    "swr": "^0.1.16"
   },
   "devDependencies": {
     "@types/micro": "^7.3.3",
